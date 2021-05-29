@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -17,6 +18,14 @@ class MyViewHolder(itemView: View): BaseViewHolder<Any>(itemView) {
             holder.itemView.setOnClickListener {
                 listener.onItemClick(holder.adapterPosition)
             }
+
+            holder.itemView.run {
+                val button = findViewById<Button>(R.id.button)
+                button.setOnClickListener {
+                    listener.onButtonClick(holder.adapterPosition)
+                }
+            }
+
             return holder
         }
     }

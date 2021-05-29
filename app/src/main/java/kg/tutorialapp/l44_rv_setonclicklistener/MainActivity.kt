@@ -1,5 +1,7 @@
 package kg.tutorialapp.l44_rv_setonclicklistener
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
@@ -27,5 +29,10 @@ class MainActivity : AppCompatActivity(), FragmentItemsListener {
             .replace(R.id.fragment_container, FragmentItemDetails.newInstance(id))
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun openBrowser(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 }

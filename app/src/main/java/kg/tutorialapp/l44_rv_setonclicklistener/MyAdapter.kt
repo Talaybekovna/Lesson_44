@@ -11,7 +11,7 @@ class MyAdapter(private val listener: OnClickListener) : RecyclerView.Adapter<Ba
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Any> {
         return when(viewType){
             ITEM -> MyViewHolder.create(parent, listener)
-            else -> AdViewHolder.create(parent) // ADVERTISMENT
+            else -> AdViewHolder.create(parent, listener) // ADVERTISMENT
         }
     }
 
@@ -43,5 +43,7 @@ class MyAdapter(private val listener: OnClickListener) : RecyclerView.Adapter<Ba
 
     interface OnClickListener{
         fun onItemClick(position: Int)
+        fun onAdClick(position: Int)
+        fun onButtonClick(position: Int)
     }
 }
