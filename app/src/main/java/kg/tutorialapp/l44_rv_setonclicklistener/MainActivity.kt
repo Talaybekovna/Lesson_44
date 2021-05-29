@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FragmentItemsListener {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -12,10 +13,19 @@ class MainActivity : AppCompatActivity() {
         setup()
     }
 
-    private fun setup() {
-        val myAdapter = MyAdapter()
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.adapter = myAdapter
-        myAdapter.setNewItems(Data.getLongListOfItems())
+    private fun setup(){
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_container, FragmentItems())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun openFragmentItemDetails(id: Long) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, FragmentItemDetails.newInstance(id))
+            .addToBackStack(null)
+            .commit()
     }
 }

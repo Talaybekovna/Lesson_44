@@ -10,10 +10,14 @@ import android.widget.TextView
 class MyViewHolder(itemView: View): BaseViewHolder<Any>(itemView) {
 
     companion object{
-        fun create(parent: ViewGroup): MyViewHolder {
+        fun create(parent: ViewGroup, listener: MyAdapter.OnClickListener): MyViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_my_viewholder, parent, false)
-            return MyViewHolder(view)
+            val holder = MyViewHolder(view)
+            holder.itemView.setOnClickListener {
+                listener.onItemClick(holder.adapterPosition)
+            }
+            return holder
         }
     }
 
